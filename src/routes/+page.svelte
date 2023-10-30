@@ -2,6 +2,9 @@
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 
+	let showMap = false;
+	let location = null;
+
 	onMount(() => {
 		if (browser) {
 			var markersGroup = L.layerGroup();
@@ -40,46 +43,54 @@
 				.addTo(runescape_map)
 				.bringToBack();
 
-                runescape_map.addLayer(markersGroup);
+			runescape_map.addLayer(markersGroup);
 
 			function addMarker(e) {
 				markersGroup.clearLayers();
-
 				L.marker(e.latlng).addTo(markersGroup);
+				location = e.latlng;
 			}
 			runescape_map.on('click', addMarker);
 		}
 	});
 </script>
 
-<div class="bg-white p-4 shadow-md">
-	<div class="mx-auto max-w-5xl">
+<div class="absolute inset-0 z-[10]">
+	<img src="/location.png" alt="" class="object-cover object-center w-full h-full" />
+</div>
+
+<div class="mx-auto max-w-5xl flex flex-col space-y-4 z-[20] relative">
+	<div class="bg-stone-50 text-stone-800 p-4 shadow-md rounded-b-lg shadow-lg">
 		<header>
 			<h1 class="font-bold text-2xl">RS3 Guessr</h1>
 		</header>
 	</div>
-</div>
 
-<div class="mx-auto max-w-5xl">
-	<div class="mt-6 shadow-xl rounded-2xl aspect-video">
-		<img
-			src="/location.png"
-			alt=""
-			class="shadow-xl object-cover object-center w-full h-full rounded-2xl"
-		/>
+	<div class="mx-auto">
+		{#if !showMap}
+			<button
+				on:click={() => (showMap = true)}
+				class="py-2 shadow-lg px-10 rounded-full shadow-md bg-stone-50 text-black font-bold"
+				>Show Map</button
+			>
+		{:else}
+			<button
+				on:click={() => (showMap = false)}
+				class="py-2 shadow-lg px-10 rounded-full shadow-md bg-stone-50 text-black font-bold"
+				>Hide Map</button
+			>
+		{/if}
 	</div>
-</div>
 
-<div class="absolute bottom-0 w-full left-0">
-	<div class="relative mx-auto max-w-5xl">
-		<div class=" translate-y-[600px] hover:translate-y-[0px] transition-all duration-300">
-			<div class="z-[20] absolute bottom-6 left-0 w-full flex justify-center">
-				<button class="py-2 px-10 rounded-full shadow-md bg-white text-black font-bold"
-					>Confirm Guess</button
-				>
-			</div>
-
-			<div class="rounded-t-2xl z-[10]" id="map" style="height: 700px;" />
+	{#if location}
+		<div class="mx-auto">
+			<button class="py-2 shadow-lg px-10 rounded-full shadow-md bg-blue-500 text-white font-bold"
+				>Confirm Guess</button
+			>
 		</div>
-	</div>
+	{/if}
+</div>
+
+<div class={`absolute inset-0 z-[15] ${showMap ? '' : 'pointer-events-none'}`} style={`opacity: ${showMap ? '100%' : '0%'}`}>
+	<div id="map" class="w-full h-full" />
 </div>
