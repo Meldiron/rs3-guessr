@@ -1,12 +1,13 @@
-<script>
+<script lang="ts">
 	import { Client, Account, ID } from 'appwrite';
 
-	const client = new Client().setEndpoint('https://cloud.appwrite.io/v1').setProject('rs3-guessr');
+	const client = new Client()
+		.setEndpoint('https://cloud.appwrite.io/v1')
+		.setProject('rs3-guessr');
 
 	const account = new Account(client);
 
-	/** @type {string} */
-	let email = '';
+	let email: string = '';
 
 	function createMagicURLSession() {
 		const promise = account.createMagicURLSession(ID.unique(), email);
