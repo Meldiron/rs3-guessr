@@ -103,9 +103,9 @@
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 	<div class="aspect-[16/7]">
 		<img
-			class="w-full h-full object-cover rounded-xl"
-			src="/location.png"
-			alt="Image Description"
+			class="w-full h-full object-center rounded-xl"
+			src="/hero.png"
+			alt="Hero"
 		/>
 	</div>
 </div>
@@ -248,7 +248,7 @@
 			<img
 				class="rounded-xl"
 				src="https://images.unsplash.com/photo-1606868306217-dbf5046868d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1981&q=80"
-				alt="Image Description"
+				alt="Render"
 			/>
 		</div>
 		<!-- End Col -->
@@ -257,7 +257,7 @@
 			<img
 				class="rounded-xl"
 				src="https://images.unsplash.com/photo-1587613991119-fbbe8e90531d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1003&q=80"
-				alt="Image Description"
+				alt="Render"
 			/>
 		</div>
 		<!-- End Col -->
@@ -266,7 +266,7 @@
 			<img
 				class="rounded-xl"
 				src="https://images.unsplash.com/photo-1554295405-abb8fd54f153?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=652&q=80"
-				alt="Image Description"
+				alt="Render"
 			/>
 		</div>
 		<!-- End Col -->
@@ -275,7 +275,7 @@
 			<img
 				class="rounded-xl"
 				src="https://images.unsplash.com/photo-1640622300473-977435c38c04?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80"
-				alt="Image Description"
+				alt="Render"
 			/>
 		</div>
 		<!-- End Col -->
@@ -335,7 +335,7 @@
 		<div>
 			<a
 				class="flex-none text-xl font-semibold text-black dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-brand-600"
-				href="#"
+				href="/"
 				aria-label="Brand">RS3 Guessr</a
 			>
 		</div>
