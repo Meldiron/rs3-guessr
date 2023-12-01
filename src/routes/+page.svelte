@@ -1,85 +1,395 @@
 <script>
-	import { browser } from '$app/environment';
-	import { onMount } from 'svelte';
-
-	onMount(() => {
-		if (browser) {
-			var markersGroup = L.layerGroup();
-
-			L.TileLayer.Game = L.TileLayer.extend({
-				getTileUrl: function (coords) {
-					return L.Util.template(
-						'https://mejrs.github.io/layers_rs3/mapsquares/-1/{z}/0_{x}_{y}.png',
-						{
-							z: coords.z,
-							x: coords.x,
-							y: -(1 + coords.y)
-						}
-					);
-				}
-			});
-			L.tileLayer.game = function () {
-				return new L.TileLayer.Game();
-			};
-
-			let runescape_map = L.map('map', {
-				crs: L.CRS.Simple,
-				x: 3200,
-				y: 3200,
-				minZoom: 0,
-				maxZoom: 3
-			}).setView([3200, 3200], 2);
-
-			L.tileLayer
-				.game('https://mejrs.github.io/layers_rs3/mapsquares/-1/{z}/0_{x}_{y}.png', {
-					minZoom: 0,
-					maxNativeZoom: 3,
-					maxZoom: 3,
-					noWrap: true
-				})
-				.addTo(runescape_map)
-				.bringToBack();
-
-                runescape_map.addLayer(markersGroup);
-
-			function addMarker(e) {
-				markersGroup.clearLayers();
-
-				L.marker(e.latlng).addTo(markersGroup);
-			}
-			runescape_map.on('click', addMarker);
+	const faq = [
+		{
+			q: 'Can I play for free?',
+			a: 'Yes, website is 100% free and does not include any ads or trackers.'
+		},
+		{
+			q: 'What is account good for?',
+			a: "At the moment there isn't anything special. In future we plan to add leaderboards, profiles, achievements and more."
+		},
+		{
+			q: 'How do I add new location?',
+			a: 'I would love new locations! Please drop me a message on Discord: Meldiron'
+		},
+		{
+			q: 'Does this website use cookies?',
+			a: 'Website only use cookies nessessary for proper functionality.'
+		},
+		{
+			q: 'Do you store my personal data?',
+			a: 'All data provided is stored on Appwrite Cloud. For any requests regarding your data, please contact me at contact@almostapps.eu'
+		},
+		{
+			q: 'Can we get in touch?',
+			a: 'For general questions, message me on Discord: Meldiron. For any security, privacy or administrative reasons you can reach me at contact@almostapps.eu'
 		}
-	});
+	];
 </script>
 
-<div class="bg-white p-4 shadow-md">
-	<div class="mx-auto max-w-5xl">
-		<header>
-			<h1 class="font-bold text-2xl">RS3 Guessr</h1>
-		</header>
+<!-- Hero -->
+<div
+	class="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-no-repeat before:bg-top before:bg-cover before:w-full before:h-full before:-z-[1] before:transform before:-translate-x-1/2"
+>
+	<div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
+		<!-- Announcement Banner -->
+		<div class="flex justify-center">
+			<a
+				href="https://www.osrsguessr.com/"
+				target="_blank"
+				class="inline-flex items-center gap-x-2 text-sm text-brand-800 p-1 ps-3 rounded-full transition hover:border-brand-300 dark:bg-brand-900 dark:text-brand-200 dark:focus:outline-none dark:ring-1 dark:ring-brand-600"
+			>
+				Try out OSRS variaton
+				<span
+					class="py-1.5 px-2.5 inline-flex justify-center items-center gap-x-2 rounded-full bg-brand-200 font-semibold text-sm text-brand-600 dark:bg-brand-700 dark:text-brand-400"
+				>
+					<svg
+						class="flex-shrink-0 w-4 h-4"
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"><path d="m9 18 6-6-6-6" /></svg
+					>
+				</span>
+			</a>
+		</div>
+		<!-- End Announcement Banner -->
+
+		<!-- Title -->
+		<div class="mt-5 max-w-2xl text-center mx-auto">
+			<h1
+				class="block font-bold text-brand-800 text-4xl md:text-5xl lg:text-6xl dark:text-brand-200"
+			>
+				GeoGuessr but
+				<span class="bg-clip-text bg-gradient-to-tl from-brand-600 to-white text-transparent"
+					>Runescape 3</span
+				>
+			</h1>
+		</div>
+		<!-- End Title -->
+
+		<div class="mt-5 max-w-3xl text-center mx-auto">
+			<p class="text-lg text-brand-600 dark:text-brand-400">
+				Geography game situated in RuneScape 3 overworld.
+			</p>
+		</div>
+
+		<!-- Buttons -->
+		<div class="mt-8 gap-3 flex justify-center">
+			<button
+				type="button"
+				class="inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
+			>
+				Create Account
+			</button>
+
+			<button
+				type="button"
+				class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
+			>
+				Play as Guest
+			</button>
+		</div>
+		<!-- End Buttons -->
 	</div>
 </div>
+<!-- End Hero -->
 
-<div class="mx-auto max-w-5xl">
-	<div class="mt-6 shadow-xl rounded-2xl aspect-video">
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+	<div class="aspect-[16/7]">
 		<img
+			class="w-full h-full object-cover rounded-xl"
 			src="/location.png"
-			alt=""
-			class="shadow-xl object-cover object-center w-full h-full rounded-2xl"
+			alt="Image Description"
 		/>
 	</div>
 </div>
 
-<div class="absolute bottom-0 w-full left-0">
-	<div class="relative mx-auto max-w-5xl">
-		<div class=" translate-y-[600px] hover:translate-y-[0px] transition-all duration-300">
-			<div class="z-[20] absolute bottom-6 left-0 w-full flex justify-center">
-				<button class="py-2 px-10 rounded-full shadow-md bg-white text-black font-bold"
-					>Confirm Guess</button
-				>
-			</div>
-
-			<div class="rounded-t-2xl z-[10]" id="map" style="height: 700px;" />
+<!-- Icon Blocks -->
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+	<!-- Grid -->
+	<div class="grid md:grid-cols-2 gap-12">
+		<div class="lg:w-3/4">
+			<h2 class="text-3xl text-brand-800 font-bold lg:text-4xl dark:text-white">
+				Guess Runescape map locations on a map
+			</h2>
+			<p class="mt-3 text-brand-800 dark:text-brand-400">
+				Aliqua enim mollit aute voluptate adipisicing non exercitation ex.
+			</p>
 		</div>
+		<!-- End Col -->
+
+		<div class="space-y-6 lg:space-y-10">
+			<!-- Icon Block -->
+			<div class="flex">
+				<!-- Icon -->
+				<span
+					class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-brand-200 bg-white text-brand-800 shadow-sm mx-auto dark:bg-brand-900 dark:border-brand-700 dark:text-brand-200"
+				>
+					<svg
+						class="flex-shrink-0 w-5 h-5"
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path
+							d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"
+						/></svg
+					>
+				</span>
+				<div class="ms-5 sm:ms-8">
+					<h3 class="text-base sm:text-lg font-semibold text-brand-800 dark:text-brand-200">
+						Test your knowledge
+					</h3>
+					<p class="mt-1 text-brand-600 dark:text-brand-400">
+						Ea labore deserunt in duis et. Nostrud voluptate laboris sint cillum voluptate.
+						Reprehenderit reprehenderit mollit cupidatat dolor
+					</p>
+				</div>
+			</div>
+			<!-- End Icon Block -->
+
+			<!-- Icon Block -->
+			<div class="flex">
+				<!-- Icon -->
+				<span
+					class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-brand-200 bg-white text-brand-800 shadow-sm mx-auto dark:bg-brand-900 dark:border-brand-700 dark:text-brand-200"
+				>
+					<svg
+						class="flex-shrink-0 w-5 h-5"
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z" /><path
+							d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"
+						/></svg
+					>
+				</span>
+				<div class="ms-5 sm:ms-8">
+					<h3 class="text-base sm:text-lg font-semibold text-brand-800 dark:text-brand-200">
+						Playful way to remember
+					</h3>
+					<p class="mt-1 text-brand-600 dark:text-brand-400">
+						Minim nulla incididunt enim cupidatat Lorem id eu nostrud pariatur mollit eiusmod sint
+						est aliquip proident.
+					</p>
+				</div>
+			</div>
+			<!-- End Icon Block -->
+
+			<!-- Icon Block -->
+			<div class="flex">
+				<!-- Icon -->
+				<span
+					class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-brand-200 bg-white text-brand-800 shadow-sm mx-auto dark:bg-brand-900 dark:border-brand-700 dark:text-brand-200"
+				>
+					<svg
+						class="flex-shrink-0 w-5 h-5"
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						><path d="M7 10v12" /><path
+							d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"
+						/></svg
+					>
+				</span>
+				<div class="ms-5 sm:ms-8">
+					<h3 class="text-base sm:text-lg font-semibold text-brand-800 dark:text-brand-200">
+						Bring back nostlagia
+					</h3>
+					<p class="mt-1 text-brand-600 dark:text-brand-400">
+						Esse excepteur excepteur tempor esse sunt culpa commodo Lorem exercitation cillum. Irure
+						velit ad do adipisicing magna minim dolore sunt laboris velit id tempor voluptate.
+					</p>
+				</div>
+			</div>
+			<!-- End Icon Block -->
+		</div>
+		<!-- End Col -->
+	</div>
+	<!-- End Grid -->
+</div>
+<!-- End Icon Blocks -->
+
+<!-- Features -->
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+	<!-- Title -->
+	<div class="mx-auto max-w-2xl mb-8 lg:mb-14 text-center">
+		<h2 class="text-3xl lg:text-6xl text-brand-800 font-bold dark:text-white">Explore the world</h2>
+		<p class="mt-6 text-brand-800 dark:text-brand-200">
+			Deserunt dolor et consectetur adipisicing nulla.
+		</p>
+	</div>
+	<!-- End Title -->
+
+	<!-- Grid -->
+	<div class="mt-20 grid grid-cols-12 items-center gap-x-2 sm:gap-x-6 lg:gap-x-8">
+		<div class="hidden md:block col-span-4 md:col-span-3">
+			<img
+				class="rounded-xl"
+				src="https://images.unsplash.com/photo-1606868306217-dbf5046868d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1981&q=80"
+				alt="Image Description"
+			/>
+		</div>
+		<!-- End Col -->
+
+		<div class="col-span-4 md:col-span-3">
+			<img
+				class="rounded-xl"
+				src="https://images.unsplash.com/photo-1587613991119-fbbe8e90531d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1003&q=80"
+				alt="Image Description"
+			/>
+		</div>
+		<!-- End Col -->
+
+		<div class="col-span-4 md:col-span-3">
+			<img
+				class="rounded-xl"
+				src="https://images.unsplash.com/photo-1554295405-abb8fd54f153?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=652&q=80"
+				alt="Image Description"
+			/>
+		</div>
+		<!-- End Col -->
+
+		<div class="col-span-4 md:col-span-3">
+			<img
+				class="rounded-xl"
+				src="https://images.unsplash.com/photo-1640622300473-977435c38c04?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80"
+				alt="Image Description"
+			/>
+		</div>
+		<!-- End Col -->
+	</div>
+	<!-- End Grid -->
+</div>
+<!-- End Features -->
+
+<!-- FAQ -->
+<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+	<!-- Title -->
+	<div class="max-w-2xl mx-auto mb-10 lg:mb-14">
+		<h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
+			You might be wondering...
+		</h2>
+	</div>
+	<!-- End Title -->
+
+	<div class="max-w-2xl mx-auto divide-y divide-brand-200 dark:divide-brand-700">
+		{#each faq as point}
+			<div class="py-8 first:pt-0 last:pb-0">
+				<div class="flex gap-x-5">
+					<svg
+						class="flex-shrink-0 mt-1 w-6 h-6 text-brand-500"
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						><circle cx="12" cy="12" r="10" /><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /><path
+							d="M12 17h.01"
+						/></svg
+					>
+
+					<div>
+						<h3 class="md:text-lg font-semibold text-brand-800 dark:text-brand-200">
+							{point.q}
+						</h3>
+						<p class="mt-1 text-brand-500">
+							{point.a}
+						</p>
+					</div>
+				</div>
+			</div>
+		{/each}
 	</div>
 </div>
+<!-- End FAQ -->
+
+<footer class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
+	<!-- Grid -->
+	<div class="text-center">
+		<div>
+			<a
+				class="flex-none text-xl font-semibold text-black dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-brand-600"
+				href="#"
+				aria-label="Brand">RS3 Guessr</a
+			>
+		</div>
+		<!-- End Col -->
+
+		<div class="mt-3">
+			<p class="text-brand-500">© RS3 Guessr 2023. All rights reserved.</p>
+		</div>
+
+		<!-- Social Brands -->
+		<div class="mt-3 space-x-2">
+			<a
+				class="inline-flex justify-center items-center w-10 h-10 text-center text-brand-500 hover:bg-brand-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition dark:text-brand-500 dark:hover:text-brand-200 dark:hover:bg-brand-800"
+				href="https://appwrite.io/"
+				target="_blank"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="112"
+					height="98"
+					fill="currentColor"
+					class="flex-shrink-0 w-3.5 h-3.5"
+					viewBox="0 0 112 98"
+					><path
+						fill="currentColor"
+						d="M111.1 73.473v24.49H48.87c-18.13 0-33.96-9.849-42.429-24.49A48.683 48.683 0 0 1 0 52.293V45.67a48.52 48.52 0 0 1 1.732-10.048C7.545 15.064 26.448 0 48.871 0c22.422 0 41.323 15.064 47.136 35.623H69.398C65.03 28.922 57.47 24.491 48.872 24.491c-8.599 0-16.16 4.43-20.528 11.132a24.262 24.262 0 0 0-3.042 6.68 24.488 24.488 0 0 0-.921 6.679c0 7.02 2.952 13.348 7.685 17.811a24.39 24.39 0 0 0 16.806 6.68H111.1"
+					/><path
+						fill="currentColor"
+						d="M111.1 42.303v24.49H65.676a24.406 24.406 0 0 0 7.686-17.81c0-2.316-.321-4.556-.922-6.68h38.66"
+					/></svg
+				>
+			</a>
+			<a
+				class="inline-flex justify-center items-center w-10 h-10 text-center text-brand-500 hover:bg-brand-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition dark:text-brand-500 dark:hover:text-brand-200 dark:hover:bg-brand-800"
+				href="https://github.com/meldiron/rs3-guessr"
+				target="_blank"
+			>
+				<svg
+					class="flex-shrink-0 w-3.5 h-3.5"
+					xmlns="http://www.w3.org/2000/svg"
+					width="16"
+					height="16"
+					fill="currentColor"
+					viewBox="0 0 16 16"
+				>
+					<path
+						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+					/>
+				</svg>
+			</a>
+		</div>
+		<!-- End Social Brands -->
+	</div>
+	<!-- End Grid -->
+</footer>
