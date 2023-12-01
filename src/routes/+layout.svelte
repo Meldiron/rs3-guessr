@@ -65,9 +65,8 @@
 					href="/play">Play</a
 				>
 
-				<button
-					type="button"
-					on:click={() => alert('Coming soon.')}
+				<a
+					href="/login"
 					class="flex items-center gap-x-2 font-medium text-brand-500 hover:text-blue-600 md:border-s md:border-brand-300 md:my-6 md:ps-6 dark:border-brand-700 dark:text-brand-400 dark:hover:text-blue-500"
 				>
 					<svg
@@ -88,7 +87,7 @@
 						/></svg
 					>
 					Log in
-				</button>
+				</a>
 			</div>
 		</div>
 	</nav>
