@@ -1,9 +1,7 @@
 <script lang="ts">
-	export const csr = true;
-	export const ssr = false;
-	import { goto, invalidateAll } from "$app/navigation";
-	import { account } from "$lib/appwrite";
-	import type { LayoutData } from "./$types";
+	import { invalidateAll } from '$app/navigation';
+	import { account } from '$lib/appwrite';
+	import type { LayoutData } from './$types';
 
 	const faq = [
 		{
@@ -45,8 +43,8 @@
 		try {
 			await account.createAnonymousSession();
 			await invalidateAll();
-		} catch (error) {
-			console.log(error);
+		} catch (error: any) {
+			alert('Could not create guest user: ' + error.message);
 		} finally {
 			loading = false;
 		}
@@ -108,29 +106,29 @@
 		<!-- Buttons -->
 		<div class="mt-8 gap-3 flex justify-center">
 			{#if !data.user}
-			<a
-				href="/login"
-				class="inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
-			>
-				Create Account
-			</a>
-			<button
-				type="button"
-				class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
-				on:click={createGuestUser}
-				disabled={loading}
-			>
-			{loading ? 'Loading...' : 'Play as Guest'}
-			</button>
+				<a
+					href="/login"
+					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
+				>
+					Create Account
+				</a>
+				<button
+					type="button"
+					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
+					on:click={createGuestUser}
+					disabled={loading}
+				>
+					{loading ? 'Loading...' : 'Play as Guest'}
+				</button>
 			{/if}
-			
+
 			{#if data.user}
-			<a
-				class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
-				href="/play"
-			>
-			Play Game
-			</a>
+				<a
+					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
+					href="/packs"
+				>
+					Play Game
+				</a>
 			{/if}
 		</div>
 		<!-- End Buttons -->
