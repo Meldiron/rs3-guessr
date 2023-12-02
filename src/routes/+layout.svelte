@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import { invalidateAll } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import type { LayoutData } from './$types';
 	import { account } from '$lib/appwrite';
 	
@@ -12,6 +12,7 @@
 		try {
 			await account.deleteSession('current');
 			await invalidateAll();
+			goto('/');
 		} catch (error) {
 			console.error('Logout failed', error);
 		}

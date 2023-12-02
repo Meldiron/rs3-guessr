@@ -11,7 +11,7 @@
 
 	async function createMagicURLSession() {
 		if (loading) {
-			return
+			return;
 		}
 
 		type = null;
