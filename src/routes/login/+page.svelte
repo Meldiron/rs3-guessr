@@ -1,25 +1,23 @@
 <script lang="ts">
-	import { Client, Account, ID } from 'appwrite';
+	import { account } from '$lib/appwrite';
+	import { ID } from 'appwrite';
 
-	const client = new Client()
-		.setEndpoint('https://cloud.appwrite.io/v1')
-		.setProject('rs3-guessr');
-
-	const account = new Account(client);
+	let type: 'error' | 'success' | null = null;
+	let msg: string = '';
 
 	let email: string = '';
 
-	function createMagicURLSession() {
-		const promise = account.createMagicURLSession(ID.unique(), email, 'http://localhost:5173/login-finish');
-
-		promise.then(
-			function (response) {
-				console.log(response);
-			},
-			function (error) {
-				console.log(error);
-			}
-		);
+	async function createMagicURLSession() {
+		type = null;
+		msg = '';
+		try {
+			const response = await account.createMagicURLSession(ID.unique(), email, 'http://localhost:5173/login-finish');
+			type = 'success';
+			msg = 'Please check your e-mail!';
+		} catch (error: any) {
+			type = 'error';
+			msg = `Unexpected error! ${error.message}`;
+		}
 	}
 </script>
 
@@ -80,4 +78,26 @@
 			</div>
 		</div>
 	</div>
+
+	{#if type == 'error'}
+	<div class="flex items-center space-x-3 mt-5 border border-red-950 rounded-xl shadow-sm bg-red-800 p-3 ">
+		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+		</svg>
+		<p class="block text-sm text-center font-bold text-brand-800 dark:text-white">
+			{ msg }
+		</p>
+	</div>
+	{/if}
+
+	{#if type == 'success'}
+	<div class="flex items-center space-x-3 mt-7 border border-green-950 rounded-xl shadow-sm bg-green-800 p-3 ">
+		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+		</svg>
+		<p class="block text-sm text-center font-bold text-brand-800 dark:text-white">
+			{ msg }
+		</p>
+	</div>
+	{/if}
 </main>
