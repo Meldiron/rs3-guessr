@@ -62,7 +62,7 @@
 			>
 				<a
 					class="font-medium text-brand-500 hover:text-brand-400 md:py-6 dark:text-brand-400 dark:hover:text-brand-500"
-					href="/play">Play</a
+					href="/packs">Play Game</a
 				>
 
 				<a
