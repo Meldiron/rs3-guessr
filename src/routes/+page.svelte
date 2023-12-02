@@ -368,13 +368,13 @@
 			<a
 				class="flex-none text-xl font-semibold text-black dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-brand-600"
 				href="/"
-				aria-label="Brand">RS3 Guessr</a
+				aria-label="Brand">RSGuessr</a
 			>
 		</div>
 		<!-- End Col -->
 
 		<div class="mt-3">
-			<p class="text-brand-500">© RS3 Guessr 2023. All rights reserved.</p>
+			<p class="text-brand-500">© RSGuessr 2023. All rights reserved.</p>
 		</div>
 
 		<!-- Social Brands -->
@@ -402,7 +402,7 @@
 			</a>
 			<a
 				class="inline-flex justify-center items-center w-10 h-10 text-center text-brand-500 hover:bg-brand-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition dark:text-brand-500 dark:hover:text-brand-200 dark:hover:bg-brand-800"
-				href="https://github.com/meldiron/rs3-guessr"
+				href="https://github.com/meldiron/rsguessr"
 				target="_blank"
 			>
 				<svg

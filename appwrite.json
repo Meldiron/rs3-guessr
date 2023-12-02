@@ -1,6 +1,6 @@
 {
 	"projectId": "rs3-guessr",
-	"projectName": "RS3 Guesssr",
+	"projectName": "RSGuesssr",
 	"buckets": [
 		{
 			"$id": "packImages",

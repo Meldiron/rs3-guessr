@@ -25,7 +25,7 @@
 	>
 		<div class="flex items-center justify-between">
 			<a class="flex-none text-xl font-semibold dark:text-white" href="/" aria-label="Brand"
-				>RS3 Guessr</a
+				>RSGuessr</a
 			>
 			<div class="md:hidden">
 				<button
