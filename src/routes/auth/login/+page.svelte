@@ -21,7 +21,7 @@
 			await account.createMagicURLSession(
 				ID.unique(),
 				email,
-				`${window.location.origin}/login-finish`
+				`${window.location.origin}/auth/login-finish`
 			);
 			type = 'success';
 			msg = 'Please check your e-mail to finish signing in.';

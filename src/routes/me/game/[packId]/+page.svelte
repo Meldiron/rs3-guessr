@@ -1,5 +1,6 @@
 <script>
 	const packName = 'Varrock';
+	const packId = 'a';
 	const locations = [
 		{
 			id: 'a',
@@ -67,7 +68,7 @@
 		{#each locations as location}
 			<!-- Card -->
 			<a
-				href={`/play/${location.id}`}
+				href={`/me/game/${packId}/${location.id}`}
 				class={`overflow-hidden relative cursor-pointer group scale-100 hover:scale-105 hover:shadow-lg shadow-md transform transition-transform duration-250 flex flex-col h-full bg-white border shadow-sm rounded-lg dark:bg-brand-950 dark:shadow-brand-700/[.7] ${
 					location.completed ? 'border-green-400' : 'border-brand-600'
 				}`}

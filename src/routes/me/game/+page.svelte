@@ -48,7 +48,7 @@
 			{#each section.cards as card}
 				<!-- Card -->
 				<a
-					href={`/packs/${card.id}`}
+					href={`/me/game/${card.id}`}
 					class={`overflow-hidden relative cursor-pointer group scale-100 hover:scale-105 hover:shadow-lg shadow-md transform transition-transform duration-250 flex flex-col h-full bg-white border shadow-sm rounded-xl rounded-b-md dark:bg-brand-950 dark:shadow-brand-700/[.7] ${
 						card.completed === card.total && card.owned ? 'border-green-400' : 'border-brand-600'
 					}`}

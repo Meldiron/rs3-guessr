@@ -107,7 +107,7 @@
 		<div class="mt-8 gap-3 flex justify-center">
 			{#if !data.user}
 				<a
-					href="/login"
+					href="/auth/login"
 					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
 				>
 					Create Account
@@ -125,7 +125,7 @@
 			{#if data.user}
 				<a
 					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
-					href="/packs"
+					href="/me/game"
 				>
 					Play Game
 				</a>

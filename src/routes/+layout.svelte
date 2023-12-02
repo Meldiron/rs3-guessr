@@ -77,12 +77,12 @@
 			>
 				<a
 					class="font-medium text-brand-500 hover:text-brand-400 md:py-6 dark:text-brand-400 dark:hover:text-brand-500"
-					href="/packs">Play Game</a
+					href="/me/game">Play Game</a
 				>
 
 				{#if !data.user}
 					<a
-						href="/login"
+						href="/auth/login"
 						class="flex items-center gap-x-2 font-medium text-brand-500 hover:text-blue-600 md:border-s md:border-brand-300 md:my-6 md:ps-6 dark:border-brand-700 dark:text-brand-400 dark:hover:text-blue-500"
 					>
 						<svg
