@@ -1,38 +1,48 @@
-<script>
+<script lang="ts">
+	import { storage } from "$lib/appwrite";
+	import type { PageData } from "./$types";
+
+	export let data: PageData;
+
+	console.log(data);
+
+
+	async function validateOwned() {
+
+	}
+
 	const sections = [
 		{
 			name: 'Ready to Play',
-			cards: [
-				{
-					id: 'a',
-					name: 'Varrock',
-					completed: 3,
-					total: 3,
-					owned: true,
-					imageUrl: '/location.png'
-				},
-				{
-					id: 'a',
-					name: 'Lumbridge',
-					completed: 2,
-					total: 3,
-					owned: true,
-					imageUrl: '/location.png'
-				}
-			]
+			cards:
+				data.packs.documents
+				.filter(pack => pack.accessType === 'free')
+				.map(pack => {
+					return {
+						id: pack.$id,
+						name: pack.name,
+						completed: 0, //
+						total: 0, //
+						owned: true, //
+						imageUrl: storage.getFilePreview('packImages', pack.imageId).toString(),
+					}
+				}),
 		},
 		{
 			name: 'Shop',
-			cards: [
-				{
-					id: 'a',
-					name: 'Falador',
-					completed: 0,
-					total: 20,
-					owned: false,
-					imageUrl: '/location.png'
-				}
-			]
+			cards:
+				data.packs.documents
+				.filter(pack => pack.accessType === 'label')
+				.map(pack => {
+					return {
+						id: pack.$id,
+						name: pack.name,
+						completed: 0, //
+						total: 0, //
+						owned: false, //
+						imageUrl: storage.getFilePreview('packImages', pack.imageId).toString(),
+					}
+				}),
 		}
 	];
 </script>

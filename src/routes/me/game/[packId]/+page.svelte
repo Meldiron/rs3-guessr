@@ -1,6 +1,13 @@
-<script>
+<script lang="ts">
+	import type { PageData } from "./$types";
+
+	export let data: PageData;
+
+	console.log(data);
+
 	const packName = 'Varrock';
 	const packId = 'a';
+	
 	const locations = [
 		{
 			id: 'a',
