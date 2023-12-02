@@ -1,22 +1,31 @@
 <script lang="ts">
 	import { account } from '$lib/appwrite';
 	import { ID } from 'appwrite';
+	import { fade } from 'svelte/transition';
 
 	let type: 'error' | 'success' | null = null;
 	let msg: string = '';
+	let loading: boolean = false;
 
 	let email: string = '';
 
 	async function createMagicURLSession() {
+		if (loading) {
+			return
+		}
+
 		type = null;
 		msg = '';
+		loading = true;
 		try {
-			const response = await account.createMagicURLSession(ID.unique(), email, 'http://localhost:5173/login-finish');
+			await account.createMagicURLSession(ID.unique(), email, 'http://localhost:5173/login-finish');
 			type = 'success';
 			msg = 'Please check your e-mail!';
 		} catch (error: any) {
 			type = 'error';
 			msg = `Unexpected error! ${error.message}`;
+		} finally {
+			loading = false;
 		}
 	}
 </script>
@@ -70,8 +79,10 @@
 						<button
 							type="submit"
 							class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-brand-600"
-							>Continue with Email</button
+							disabled={loading}
 						>
+							{loading ? 'Loading...' : 'Continue with Email'}
+						</button>
 					</div>
 				</form>
 				<!-- End Form -->
@@ -80,7 +91,7 @@
 	</div>
 
 	{#if type == 'error'}
-	<div class="flex items-center space-x-3 mt-5 border border-red-950 rounded-xl shadow-sm bg-red-800 p-3 ">
+	<div transition:fade={{ duration: 200 }} class="flex items-center space-x-3 mt-5 border border-red-950 rounded-xl shadow-sm bg-red-800 p-3 ">
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
 			<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
 		</svg>
@@ -91,7 +102,7 @@
 	{/if}
 
 	{#if type == 'success'}
-	<div class="flex items-center space-x-3 mt-7 border border-green-950 rounded-xl shadow-sm bg-green-800 p-3 ">
+	<div transition:fade={{ duration: 200 }} class="flex items-center space-x-3 mt-7 border border-green-950 rounded-xl shadow-sm bg-green-800 p-3 ">
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
 			<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
 		</svg>
