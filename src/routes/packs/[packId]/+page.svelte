@@ -6,52 +6,52 @@
 			imageUrl: '/location.png',
 			completed: true
 		},
-        {
+		{
 			id: 'a',
 			imageUrl: '/location.png',
 			completed: true
 		},
-        {
+		{
 			id: 'a',
 			imageUrl: '/location.png',
 			completed: true
 		},
-        {
+		{
 			id: 'a',
 			imageUrl: '/location.png',
 			completed: false
 		},
-        {
+		{
 			id: 'a',
 			imageUrl: '/location.png',
 			completed: true
 		},
-        {
+		{
 			id: 'a',
 			imageUrl: '/location.png',
 			completed: true
 		},
-        {
+		{
 			id: 'a',
 			imageUrl: '/location.png',
 			completed: false
 		},
-        {
+		{
 			id: 'a',
 			imageUrl: '/location.png',
 			completed: false
 		},
-        {
+		{
 			id: 'a',
 			imageUrl: '/location.png',
 			completed: true
 		},
-        {
+		{
 			id: 'a',
 			imageUrl: '/location.png',
 			completed: false
 		},
-        {
+		{
 			id: 'a',
 			imageUrl: '/location.png',
 			completed: false
@@ -75,7 +75,11 @@
 				<div
 					class="h-52 flex flex-col justify-center items-center bg-brand-900 rounded-lg relative"
 				>
-					<img class="object-cover object-center w-full h-full blur-md" src={location.imageUrl} alt="Cover" />
+					<img
+						class="object-cover object-center w-full h-full blur-md"
+						src={location.imageUrl}
+						alt="Cover"
+					/>
 
 					{#if location.completed}
 						<div

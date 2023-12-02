@@ -3,7 +3,7 @@
 	import { goto, invalidateAll } from '$app/navigation';
 	import { account } from '$lib/appwrite';
 	import { onMount } from 'svelte';
-	
+
 	// TODO: Do this as .ts
 
 	onMount(async () => {

@@ -138,11 +138,7 @@
 
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 	<div class="aspect-[16/7]">
-		<img
-			class="w-full h-full object-center rounded-xl"
-			src="/hero.png"
-			alt="Hero"
-		/>
+		<img class="w-full h-full object-center rounded-xl" src="/hero.png" alt="Hero" />
 	</div>
 </div>
 

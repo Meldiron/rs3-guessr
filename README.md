@@ -3,10 +3,10 @@ https://preline.co/examples/hero-sections.html
 FUNCTIONS
 
 guessLocation(locationId, x, y): boolean (execute:user)
-    if user owns pack
-
+if user owns pack
 
 TODO:
+
 - profiles
 - achievements / badges
 - shop / payments

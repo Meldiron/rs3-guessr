@@ -18,7 +18,11 @@
 		msg = '';
 		loading = true;
 		try {
-			await account.createMagicURLSession(ID.unique(), email, `${window.location.origin}/login-finish`);
+			await account.createMagicURLSession(
+				ID.unique(),
+				email,
+				`${window.location.origin}/login-finish`
+			);
 			type = 'success';
 			msg = 'Please check your e-mail to finish signing in.';
 		} catch (error: any) {
