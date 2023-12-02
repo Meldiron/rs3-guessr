@@ -10,7 +10,7 @@
 	let email: string = '';
 
 	function createMagicURLSession() {
-		const promise = account.createMagicURLSession(ID.unique(), email);
+		const promise = account.createMagicURLSession(ID.unique(), email, 'http://localhost:5173/login-finish');
 
 		promise.then(
 			function (response) {
