@@ -1,48 +1,41 @@
 <script lang="ts">
-	import { storage } from "$lib/appwrite";
-	import type { PageData } from "./$types";
+	import { storage } from '$lib/appwrite';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
+	const packs = data.packs.documents.map((pack) => {
+		let owned = false;
+
+		if (pack.accessType === 'free') {
+			owned = true;
+		} else if (pack.accessType === 'label') {
+			const labels = data.user?.labels ?? [];
+			owned = labels.includes(pack.$id);
+		}
+
+		return {
+			id: pack.$id,
+			name: pack.name,
+			completed: data.finishes.documents.filter((finish) => finish.packId === pack.$id).length,
+			total: data.locations.documents.filter((location) => location.packId === pack.$id).length,
+			owned,
+			imageUrl: storage.getFilePreview('packImages', pack.imageId).toString()
+		};
+	});
+
 	console.log(data);
 
-
-	async function validateOwned() {
-
-	}
+	async function validateOwned() {}
 
 	const sections = [
 		{
 			name: 'Ready to Play',
-			cards:
-				data.packs.documents
-				.filter(pack => pack.accessType === 'free')
-				.map(pack => {
-					return {
-						id: pack.$id,
-						name: pack.name,
-						completed: 0, //
-						total: 0, //
-						owned: true, //
-						imageUrl: storage.getFilePreview('packImages', pack.imageId).toString(),
-					}
-				}),
+			cards: packs.filter((pack) => pack.owned)
 		},
 		{
 			name: 'Shop',
-			cards:
-				data.packs.documents
-				.filter(pack => pack.accessType === 'label')
-				.map(pack => {
-					return {
-						id: pack.$id,
-						name: pack.name,
-						completed: 0, //
-						total: 0, //
-						owned: false, //
-						imageUrl: storage.getFilePreview('packImages', pack.imageId).toString(),
-					}
-				}),
+			cards: packs.filter((pack) => !pack.owned)
 		}
 	];
 </script>
@@ -115,14 +108,18 @@
 							{card.name}
 						</h3>
 					</div>
-					<div
-						class="mt-auto flex border-t border-brand-200 divide-x divide-brand-200 dark:border-brand-600 dark:divide-brand-700"
-					>
+					{#if card.owned}
 						<div
-							style={`width: ${Math.ceil((card.completed / card.total) * 100)}%`}
-							class="rounded-bl-md h-4 bg-green-600"
-						/>
-					</div>
+							class="mt-auto flex border-t border-brand-200 divide-x divide-brand-200 dark:border-brand-600 dark:divide-brand-700"
+						>
+							<div
+								style={`width: ${
+									card.total === 0 ? 100 : Math.ceil((card.completed / card.total) * 100)
+								}%`}
+								class="rounded-bl-md h-4 bg-green-600"
+							/>
+						</div>
+					{/if}
 				</a>
 				<!-- End Card -->
 			{/each}

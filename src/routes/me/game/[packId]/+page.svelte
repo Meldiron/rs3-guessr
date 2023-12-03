@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageData } from "./$types";
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 
@@ -7,7 +7,7 @@
 
 	const packName = 'Varrock';
 	const packId = 'a';
-	
+
 	const locations = [
 		{
 			id: 'a',
