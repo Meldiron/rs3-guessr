@@ -1,247 +1,302 @@
 {
-	"projectId": "rs3-guessr",
-	"projectName": "RSGuessr",
-	"buckets": [
-		{
-			"$id": "packImages",
-			"$createdAt": "2023-12-02T15:53:19.227+00:00",
-			"$updatedAt": "2023-12-02T15:53:47.682+00:00",
-			"$permissions": ["read(\"users\")"],
-			"fileSecurity": false,
-			"name": "packImages",
-			"enabled": true,
-			"maximumFileSize": 10485760,
-			"allowedFileExtensions": ["png", "jpg", "jpeg"],
-			"compression": "none",
-			"encryption": true,
-			"antivirus": true
-		},
-		{
-			"$id": "locationImages",
-			"$createdAt": "2023-12-02T15:53:58.488+00:00",
-			"$updatedAt": "2023-12-02T15:54:11.415+00:00",
-			"$permissions": [],
-			"fileSecurity": true,
-			"name": "locationImages",
-			"enabled": true,
-			"maximumFileSize": 10485760,
-			"allowedFileExtensions": ["jpg", "png", "jpeg"],
-			"compression": "none",
-			"encryption": true,
-			"antivirus": true
-		}
-	],
-	"databases": [
-		{
-			"$id": "main",
-			"name": "main",
-			"$createdAt": "2023-12-02T15:39:47.285+00:00",
-			"$updatedAt": "2023-12-02T15:39:47.285+00:00",
-			"enabled": true
-		}
-	],
-	"collections": [
-		{
-			"$id": "packs",
-			"$permissions": ["read(\"users\")"],
-			"databaseId": "main",
-			"name": "packs",
-			"enabled": true,
-			"documentSecurity": false,
-			"attributes": [
-				{
-					"key": "name",
-					"type": "string",
-					"status": "available",
-					"error": "",
-					"required": true,
-					"array": false,
-					"size": 255,
-					"default": null
-				},
-				{
-					"key": "imageId",
-					"type": "string",
-					"status": "available",
-					"error": "",
-					"required": true,
-					"array": false,
-					"size": 255,
-					"default": null
-				},
-				{
-					"key": "accessType",
-					"type": "string",
-					"status": "available",
-					"error": "",
-					"required": true,
-					"array": false,
-					"elements": ["label", "free"],
-					"format": "enum",
-					"default": null
-				}
-			],
-			"indexes": []
-		},
-		{
-			"$id": "locations",
-			"$permissions": [],
-			"databaseId": "main",
-			"name": "locations",
-			"enabled": true,
-			"documentSecurity": true,
-			"attributes": [
-				{
-					"key": "packId",
-					"type": "string",
-					"status": "available",
-					"error": "",
-					"required": true,
-					"array": false,
-					"size": 255,
-					"default": null
-				},
-				{
-					"key": "imageId",
-					"type": "string",
-					"status": "available",
-					"error": "",
-					"required": true,
-					"array": false,
-					"size": 255,
-					"default": null
-				},
-				{
-					"key": "hint",
-					"type": "string",
-					"status": "available",
-					"error": "",
-					"required": true,
-					"array": false,
-					"size": 255,
-					"default": null
-				}
-			],
-			"indexes": [
-				{
-					"key": "index_1",
-					"type": "key",
-					"status": "available",
-					"error": "",
-					"attributes": ["packId"],
-					"orders": ["ASC"]
-				}
-			]
-		},
-		{
-			"$id": "locationCoordinates",
-			"$permissions": [],
-			"databaseId": "main",
-			"name": "locationCoordinates",
-			"enabled": true,
-			"documentSecurity": false,
-			"attributes": [
-				{
-					"key": "locationId",
-					"type": "string",
-					"status": "available",
-					"error": "",
-					"required": true,
-					"array": false,
-					"size": 255,
-					"default": null
-				},
-				{
-					"key": "lat",
-					"type": "double",
-					"status": "available",
-					"error": "",
-					"required": true,
-					"array": false,
-					"min": -1.7976931348623157e308,
-					"max": 1.7976931348623157e308,
-					"default": null
-				},
-				{
-					"key": "lng",
-					"type": "double",
-					"status": "available",
-					"error": "",
-					"required": true,
-					"array": false,
-					"min": -1.7976931348623157e308,
-					"max": 1.7976931348623157e308,
-					"default": null
-				}
-			],
-			"indexes": [
-				{
-					"key": "index_1",
-					"type": "key",
-					"status": "available",
-					"error": "",
-					"attributes": ["locationId"],
-					"orders": ["ASC"]
-				}
-			]
-		},
-		{
-			"$id": "locationFinishes",
-			"$permissions": [],
-			"databaseId": "main",
-			"name": "locationFinishes",
-			"enabled": true,
-			"documentSecurity": true,
-			"attributes": [
-				{
-					"key": "userId",
-					"type": "string",
-					"status": "available",
-					"error": "",
-					"required": true,
-					"array": false,
-					"size": 255,
-					"default": null
-				},
-				{
-					"key": "locationId",
-					"type": "string",
-					"status": "available",
-					"error": "",
-					"required": true,
-					"array": false,
-					"size": 255,
-					"default": null
-				},
-				{
-					"key": "packId",
-					"type": "string",
-					"status": "available",
-					"error": "",
-					"required": true,
-					"array": false,
-					"size": 255,
-					"default": null
-				}
-			],
-			"indexes": [
-				{
-					"key": "index_1",
-					"type": "key",
-					"status": "available",
-					"error": "",
-					"attributes": ["userId", "packId"],
-					"orders": ["ASC", "ASC"]
-				},
-				{
-					"key": "index_2",
-					"type": "key",
-					"status": "available",
-					"error": "",
-					"attributes": ["userId", "locationId"],
-					"orders": ["ASC", "ASC"]
-				}
-			]
-		}
-	]
+    "projectId": "rs3-guessr",
+    "projectName": "RSGuessr",
+    "buckets": [
+        {
+            "$id": "packImages",
+            "$createdAt": "2023-12-02T15:53:19.227+00:00",
+            "$updatedAt": "2023-12-02T15:53:47.682+00:00",
+            "$permissions": [
+                "read(\"users\")"
+            ],
+            "fileSecurity": false,
+            "name": "packImages",
+            "enabled": true,
+            "maximumFileSize": 10485760,
+            "allowedFileExtensions": [
+                "png",
+                "jpg",
+                "jpeg"
+            ],
+            "compression": "none",
+            "encryption": true,
+            "antivirus": true
+        },
+        {
+            "$id": "locationImages",
+            "$createdAt": "2023-12-02T15:53:58.488+00:00",
+            "$updatedAt": "2023-12-02T15:54:11.415+00:00",
+            "$permissions": [],
+            "fileSecurity": true,
+            "name": "locationImages",
+            "enabled": true,
+            "maximumFileSize": 10485760,
+            "allowedFileExtensions": [
+                "jpg",
+                "png",
+                "jpeg"
+            ],
+            "compression": "none",
+            "encryption": true,
+            "antivirus": true
+        }
+    ],
+    "databases": [
+        {
+            "$id": "main",
+            "name": "main",
+            "$createdAt": "2023-12-02T15:39:47.285+00:00",
+            "$updatedAt": "2023-12-02T15:39:47.285+00:00",
+            "enabled": true
+        }
+    ],
+    "collections": [
+        {
+            "$id": "packs",
+            "$permissions": [
+                "read(\"users\")"
+            ],
+            "databaseId": "main",
+            "name": "packs",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "imageId",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "accessType",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "elements": [
+                        "label",
+                        "free"
+                    ],
+                    "format": "enum",
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "locations",
+            "$permissions": [],
+            "databaseId": "main",
+            "name": "locations",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "packId",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "imageId",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "hint",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "index_1",
+                    "type": "key",
+                    "status": "available",
+                    "error": "",
+                    "attributes": [
+                        "packId"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "locationCoordinates",
+            "$permissions": [],
+            "databaseId": "main",
+            "name": "locationCoordinates",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "locationId",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "lat",
+                    "type": "double",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "min": -1.7976931348623157e+308,
+                    "max": 1.7976931348623157e+308,
+                    "default": null
+                },
+                {
+                    "key": "lng",
+                    "type": "double",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "min": -1.7976931348623157e+308,
+                    "max": 1.7976931348623157e+308,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "index_1",
+                    "type": "key",
+                    "status": "available",
+                    "error": "",
+                    "attributes": [
+                        "locationId"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "locationFinishes",
+            "$permissions": [],
+            "databaseId": "main",
+            "name": "locationFinishes",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "userId",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "locationId",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "packId",
+                    "type": "string",
+                    "status": "available",
+                    "error": "",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "index_1",
+                    "type": "key",
+                    "status": "available",
+                    "error": "",
+                    "attributes": [
+                        "userId",
+                        "packId"
+                    ],
+                    "orders": [
+                        "ASC",
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "index_2",
+                    "type": "key",
+                    "status": "available",
+                    "error": "",
+                    "attributes": [
+                        "userId",
+                        "locationId"
+                    ],
+                    "orders": [
+                        "ASC",
+                        "ASC"
+                    ]
+                }
+            ]
+        }
+    ],
+    "functions": [
+        {
+            "$id": "guessLocation",
+            "name": "guessLocation",
+            "runtime": "node-18.0",
+            "execute": ["users"],
+            "events": [],
+            "schedule": "",
+            "timeout": 15,
+            "enabled": true,
+            "logging": true,
+            "entrypoint": "src/main.js",
+            "commands": "npm install",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "path": "functions/guessLocation"
+        }
+    ]
 }

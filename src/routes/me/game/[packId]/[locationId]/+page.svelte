@@ -2,7 +2,8 @@
 	import type { PageData } from './$types';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
-	import { storage } from '$lib/appwrite';
+	import { functions, storage } from '$lib/appwrite';
+	import { goto } from '$app/navigation';
 
 	// @ts-ignore
 	declare const L: any;
@@ -76,6 +77,48 @@
 	function toggleHint() {
 		showHint = !showHint;
 	}
+
+	let isSubmitting = false;
+	async function submitLocation() {
+		if (isSubmitting) {
+			return;
+		}
+
+		isSubmitting = true;
+
+		try {
+			const response = await functions.createExecution(
+				'guessLocation',
+				JSON.stringify({
+					locationId: data.location.$id,
+					lat: pickedLocation.lat,
+					lng: pickedLocation.lng
+				}),
+				undefined,
+				undefined,
+				undefined,
+				{
+					'content-type': 'application/json'
+				}
+			);
+
+			if (response.status !== 'completed') {
+				throw new Error(response.responseBody);
+			}
+
+			const body = JSON.parse(response.responseBody);
+			if (!body.ok) {
+				throw new Error(body.message);
+			}
+
+			alert("Correct!");
+			goto('/me/game/' + data.pack.$id);
+		} catch (err: any) {
+			alert(err.message);
+		} finally {
+			isSubmitting = false;
+		}
+	}
 </script>
 
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
@@ -117,13 +160,14 @@
 				</button>
 
 				{#if pickedLocation}
-				<button
-					on:click={() => alert('In development')}
-					type="button"
-					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4 hover:bg-brand-100"
-				>
-					Submit Guess
-				</button>
+					<button
+						on:click={submitLocation}
+						disabled={isSubmitting}
+						type="button"
+						class="disabled:opacity-50 inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4 hover:bg-brand-100"
+					>
+						{isSubmitting ? 'Submitting...' : 'Submit Guess'}
+					</button>
 				{/if}
 			{:else}
 				<button
@@ -134,7 +178,6 @@
 					Switch to Map
 				</button>
 			{/if}
-			
 		</div>
 
 		<div class="mt-12">

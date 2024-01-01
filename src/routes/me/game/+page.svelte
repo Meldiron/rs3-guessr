@@ -24,8 +24,6 @@
 		};
 	});
 
-	async function validateOwned() {}
-
 	const sections = [
 		{
 			name: 'Ready to Play',
