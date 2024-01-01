@@ -6,6 +6,12 @@
 
 	onMount(() => {
 		if (browser) {
+			var icon = L.icon({
+				iconUrl: '/marker.png',
+				iconSize: [41, 50],
+				iconAnchor: [20, 50],
+			});
+
 			var markersGroup = L.layerGroup();
 
 			L.TileLayer.Game = L.TileLayer.extend({
@@ -49,7 +55,7 @@
 
 				console.log(e.latlng);
 
-				L.marker(e.latlng).addTo(markersGroup);
+				L.marker(e.latlng, {icon: icon}).addTo(markersGroup);
 			}
 			runescape_map.on('click', addMarker);
 		}

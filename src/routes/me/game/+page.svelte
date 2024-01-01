@@ -43,7 +43,7 @@
 <!-- Card Blog -->
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto flex flex-col space-y-12">
 	{#each sections as section}
-		<h1 class="mb-8 text-4xl sm:text-6xl font-bold text-brand-800 dark:text-brand-600">
+		<h1 class="mb-8 text-4xl sm:text-6xl font-bold text-brand-50">
 			{section.name}
 		</h1>
 		<!-- Grid -->

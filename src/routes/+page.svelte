@@ -6,19 +6,19 @@
 	const faq = [
 		{
 			q: 'Can I play for free?',
-			a: 'Yes, website is 100% free and does not include any ads or trackers.'
+			a: 'Yes, RSGuessr is 100% free and does not include any ads or trackers.'
 		},
 		{
-			q: 'What is account good for?',
-			a: "At the moment there isn't anything special. In future we plan to add leaderboards, profiles, achievements and more."
+			q: 'Why should I create an account?',
+			a: "At the moment, there isn't anything special. In the future we plan to add leaderboards, profiles, achievements, and more. Registering an account shows your interest in the future of RSGuessr."
 		},
 		{
-			q: 'How do I add new location?',
-			a: 'I would love new locations! Please drop me a message on Discord: Meldiron'
+			q: 'Can I suggest a new location?',
+			a: 'We would love new locations! Please leave your suggestions at contact@almostapps.eu'
 		},
 		{
-			q: 'Does this website use cookies?',
-			a: 'Website only use cookies nessessary for proper functionality.'
+			q: 'Does RSGuessr use cookies?',
+			a: 'RSGuessr only uses cookies necessary for proper functionality.'
 		},
 		{
 			q: 'Do you store my personal data?',
@@ -26,7 +26,7 @@
 		},
 		{
 			q: 'Can we get in touch?',
-			a: 'For general questions, message me on Discord: Meldiron. For any security, privacy or administrative reasons you can reach me at contact@almostapps.eu'
+			a: 'For general questions, message me on Discord: Meldiron. For any security, privacy, or administrative requests, you can reach me at contact@almostapps.eu'
 		}
 	];
 
@@ -63,7 +63,7 @@
 				target="_blank"
 				class="inline-flex items-center gap-x-2 text-sm text-brand-800 p-1 ps-3 rounded-full transition hover:border-brand-300 dark:bg-brand-900 dark:text-brand-200 dark:focus:outline-none dark:ring-1 dark:ring-brand-600"
 			>
-				Try out OSRS variaton
+				Old School alternative
 				<span
 					class="py-1.5 px-2.5 inline-flex justify-center items-center gap-x-2 rounded-full bg-brand-200 font-semibold text-sm text-brand-600 dark:bg-brand-700 dark:text-brand-400"
 				>
@@ -91,14 +91,14 @@
 			>
 				GeoGuessr but
 				<span class="bg-clip-text bg-gradient-to-tl from-brand-600 to-white text-transparent"
-					>Runescape 3</span
+					>RuneScape 3</span
 				>
 			</h1>
 		</div>
 		<!-- End Title -->
 
 		<div class="mt-5 max-w-3xl text-center mx-auto">
-			<p class="text-lg text-brand-600 dark:text-brand-400">
+			<p class="text-lg text-brand-400">
 				Geography game situated in RuneScape 3 overworld.
 			</p>
 		</div>
@@ -148,10 +148,10 @@
 	<div class="grid md:grid-cols-2 gap-12">
 		<div class="lg:w-3/4">
 			<h2 class="text-3xl text-brand-800 font-bold lg:text-4xl dark:text-white">
-				Guess Runescape map locations on a map
+				Guess screenshot locations on a RuneScape map
 			</h2>
-			<p class="mt-3 text-brand-800 dark:text-brand-400">
-				Aliqua enim mollit aute voluptate adipisicing non exercitation ex.
+			<p class="mt-3 text-brand-400">
+				Look at an amazing-looking game screenshot and guess where in the Gielinor the picture was taken.
 			</p>
 		</div>
 		<!-- End Col -->
@@ -268,8 +268,8 @@
 	<!-- Title -->
 	<div class="mx-auto max-w-2xl mb-8 lg:mb-14 text-center">
 		<h2 class="text-3xl lg:text-6xl text-brand-800 font-bold dark:text-white">Explore the world</h2>
-		<p class="mt-6 text-brand-800 dark:text-brand-200">
-			Deserunt dolor et consectetur adipisicing nulla.
+		<p class="mt-6 text-brand-400">
+			Travel through Gielinor in a different way.
 		</p>
 	</div>
 	<!-- End Title -->
@@ -277,38 +277,46 @@
 	<!-- Grid -->
 	<div class="mt-20 grid grid-cols-12 items-center gap-x-2 sm:gap-x-6 lg:gap-x-8">
 		<div class="hidden md:block col-span-4 md:col-span-3">
-			<img
-				class="rounded-xl"
-				src="https://images.unsplash.com/photo-1606868306217-dbf5046868d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1981&q=80"
-				alt="Render"
-			/>
+			<div class="rounded-xl w-full h-[380px]">
+				<img
+					class="rounded-xl w-full h-full object-center object-cover"
+					src="/gallery4.jpeg"
+					alt="Render"
+				/>
+			</div>
 		</div>
 		<!-- End Col -->
 
 		<div class="col-span-4 md:col-span-3">
-			<img
-				class="rounded-xl"
-				src="https://images.unsplash.com/photo-1587613991119-fbbe8e90531d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1003&q=80"
-				alt="Render"
-			/>
+			<div class="rounded-xl w-full h-[450px]">
+				<img
+					class="rounded-xl w-full h-full object-center object-cover"
+					src="/gallery1.jpeg"
+					alt="Render"
+				/>
+			</div>
 		</div>
 		<!-- End Col -->
 
 		<div class="col-span-4 md:col-span-3">
-			<img
-				class="rounded-xl"
-				src="https://images.unsplash.com/photo-1554295405-abb8fd54f153?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=652&q=80"
-				alt="Render"
-			/>
+			<div class="rounded-xl w-full h-[600px]">
+				<img
+					class="rounded-xl w-full h-full object-center object-cover"
+					src="/gallery2.jpeg"
+					alt="Render"
+				/>
+			</div>
 		</div>
 		<!-- End Col -->
 
 		<div class="col-span-4 md:col-span-3">
-			<img
-				class="rounded-xl"
-				src="https://images.unsplash.com/photo-1640622300473-977435c38c04?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2072&q=80"
-				alt="Render"
-			/>
+			<div class="rounded-xl w-full h-[350px]">
+				<img
+					class="rounded-xl w-full h-full object-center object-cover"
+					src="/gallery3.jpeg"
+					alt="Render"
+				/>
+			</div>
 		</div>
 		<!-- End Col -->
 	</div>
@@ -374,7 +382,7 @@
 		<!-- End Col -->
 
 		<div class="mt-3">
-			<p class="text-brand-500">© RSGuessr 2023. All rights reserved.</p>
+			<p class="text-brand-500">© RSGuessr 2024. All rights reserved.</p>
 		</div>
 
 		<!-- Social Brands -->

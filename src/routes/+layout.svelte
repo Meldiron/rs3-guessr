@@ -24,8 +24,10 @@
 		aria-label="Global"
 	>
 		<div class="flex items-center justify-between">
-			<a class="flex-none text-xl font-semibold dark:text-white" href="/" aria-label="Brand"
-				>RSGuessr</a
+			<a class="flex-none text-xl font-semibold dark:text-white flex items-center space-x-2" href="/" aria-label="Brand"
+				>
+				<img src="/favicon.png" width="20" height="20" alt="Logo">
+				<span>RSGuessr</span></a
 			>
 			<div class="md:hidden">
 				<button
@@ -77,7 +79,8 @@
 			>
 				<a
 					class="font-medium text-brand-500 hover:text-brand-400 md:py-6 dark:text-brand-400 dark:hover:text-brand-500"
-					href="/me/game">Play Game</a
+					href={!data.user ? '/auth/login' : '/me/game'}
+					>Play Game</a
 				>
 
 				{#if !data.user}
