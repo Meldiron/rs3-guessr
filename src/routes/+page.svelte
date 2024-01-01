@@ -61,7 +61,7 @@
 			<a
 				href="https://www.osrsguessr.com/"
 				target="_blank"
-				class="hover:bg-brand-800 inline-flex items-center gap-x-2 text-sm  p-1 ps-3 rounded-full transition hover:border-brand-300 bg-brand-900 text-brand-200 dark:focus:outline-none dark:ring-1 dark:ring-brand-600"
+				class="hover:bg-brand-800 inline-flex items-center gap-x-2 text-sm p-1 ps-3 rounded-full transition hover:border-brand-300 bg-brand-900 text-brand-200 dark:focus:outline-none dark:ring-1 dark:ring-brand-600"
 			>
 				Old School alternative
 				<span
@@ -98,9 +98,7 @@
 		<!-- End Title -->
 
 		<div class="mt-5 max-w-3xl text-center mx-auto">
-			<p class="text-lg text-brand-400">
-				Geography game situated in RuneScape 3 overworld.
-			</p>
+			<p class="text-lg text-brand-400">Geography game situated in RuneScape 3 overworld.</p>
 		</div>
 
 		<!-- Buttons -->
@@ -151,7 +149,8 @@
 				Guess screenshot locations on a RuneScape map
 			</h2>
 			<p class="mt-3 text-brand-400">
-				Look at an amazing-looking game screenshot and guess where in the Gielinor the picture was taken.
+				Look at an amazing-looking game screenshot and guess where in the Gielinor the picture was
+				taken.
 			</p>
 		</div>
 		<!-- End Col -->
@@ -164,28 +163,28 @@
 					class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-brand-200 bg-white text-brand-800 shadow-sm mx-auto dark:bg-brand-900 dark:border-brand-700 dark:text-brand-200"
 				>
 					<svg
-						class="flex-shrink-0 w-5 h-5"
 						xmlns="http://www.w3.org/2000/svg"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
 						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
 						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path
-							d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"
-						/></svg
+						class="flex-shrink-0 w-5 h-5"
 					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+						/>
+					</svg>
 				</span>
 				<div class="ms-5 sm:ms-8">
 					<h3 class="text-base sm:text-lg font-semibold text-brand-800 dark:text-brand-200">
-						Test your knowledge
+						Playful way to explore
 					</h3>
 					<p class="mt-1 text-brand-600 dark:text-brand-400">
-						Ea labore deserunt in duis et. Nostrud voluptate laboris sint cillum voluptate.
-						Reprehenderit reprehenderit mollit cupidatat dolor
+						RuneScape is an enormous game with a huge overworld. The beginning of your exploration
+						may feel overwhelming! RSGuessr provides an additional gamified challenge when exploring
+						specific areas.
 					</p>
 				</div>
 			</div>
@@ -208,54 +207,46 @@
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
-							d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 01-.657.643 48.39 48.39 0 01-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 01-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 00-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 01-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 00.657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 01-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 005.427-.63 48.05 48.05 0 00.582-4.717.532.532 0 00-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 00.658-.663 48.422 48.422 0 00-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 01-.61-.58v0z"
+							d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 0 0 2.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 0 1 2.916.52 6.003 6.003 0 0 1-5.395 4.972m0 0a6.726 6.726 0 0 1-2.749 1.35m0 0a6.772 6.772 0 0 1-3.044 0"
 						/>
 					</svg>
 				</span>
 				<div class="ms-5 sm:ms-8">
 					<h3 class="text-base sm:text-lg font-semibold text-brand-800 dark:text-brand-200">
-						Playful way to remember
+						A new way to play
 					</h3>
 					<p class="mt-1 text-brand-600 dark:text-brand-400">
-						Minim nulla incididunt enim cupidatat Lorem id eu nostrud pariatur mollit eiusmod sint
-						est aliquip proident.
+						Burnout is real! When you feel like there is nothing left to enjoy in the game, try out
+						a brand-new experience. A unique challenge provides a new (unofficial) achievement in
+						your completionist book.
 					</p>
 				</div>
 			</div>
 			<!-- End Icon Block -->
 
-			<!-- Icon Block -->
-			<div class="flex">
-				<!-- Icon -->
-				<span
-					class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-brand-200 bg-white text-brand-800 shadow-sm mx-auto dark:bg-brand-900 dark:border-brand-700 dark:text-brand-200"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						class="flex-shrink-0 w-5 h-5"
+				<!-- Icon Block -->
+				<div class="flex">
+					<!-- Icon -->
+					<span
+						class="flex-shrink-0 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border border-brand-200 bg-white text-brand-800 shadow-sm mx-auto dark:bg-brand-900 dark:border-brand-700 dark:text-brand-200"
 					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
-						/>
-					</svg>
-				</span>
-				<div class="ms-5 sm:ms-8">
-					<h3 class="text-base sm:text-lg font-semibold text-brand-800 dark:text-brand-200">
-						Bring back nostlagia
-					</h3>
-					<p class="mt-1 text-brand-600 dark:text-brand-400">
-						Esse excepteur excepteur tempor esse sunt culpa commodo Lorem exercitation cillum. Irure
-						velit ad do adipisicing magna minim dolore sunt laboris velit id tempor voluptate.
-					</p>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="flex-shrink-0 w-5 h-5">
+						<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+					  </svg>
+					  
+							
+						
+					</span>
+					<div class="ms-5 sm:ms-8">
+						<h3 class="text-base sm:text-lg font-semibold text-brand-800 dark:text-brand-200">
+							Grind we know and love
+						</h3>
+						<p class="mt-1 text-brand-600 dark:text-brand-400">
+							If there is one thing bringing RuneScape community together, it's joy of progression. On RSGuessr everything is split into packs you can complete. Can you finish them all?
+						</p>
+					</div>
 				</div>
-			</div>
-			<!-- End Icon Block -->
+				<!-- End Icon Block -->
 		</div>
 		<!-- End Col -->
 	</div>
@@ -268,9 +259,7 @@
 	<!-- Title -->
 	<div class="mx-auto max-w-2xl mb-8 lg:mb-14 text-center">
 		<h2 class="text-3xl lg:text-6xl text-brand-800 font-bold dark:text-white">Explore the world</h2>
-		<p class="mt-6 text-brand-400">
-			Travel through Gielinor in a different way.
-		</p>
+		<p class="mt-6 text-brand-400">Travel through Gielinor in a different way.</p>
 	</div>
 	<!-- End Title -->
 
@@ -382,7 +371,7 @@
 		<!-- End Col -->
 
 		<div class="mt-3">
-			<p class="text-brand-500">© RSGuessr 2024. All rights reserved.</p>
+			<p class="text-brand-500">© RSGuessr 2024, screenshots by RuneScape.</p>
 		</div>
 
 		<!-- Social Brands -->

@@ -13,7 +13,7 @@
 
 	let showMap = false;
 	let showHint = false;
-	let pickedLocation = null;
+	let pickedLocation: any = null;
 
 	onMount(() => {
 		if (browser) {
@@ -118,6 +118,7 @@
 
 				{#if pickedLocation}
 				<button
+					on:click={() => alert('In development')}
 					type="button"
 					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4 hover:bg-brand-100"
 				>
