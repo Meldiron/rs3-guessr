@@ -61,7 +61,7 @@
 			<a
 				href="https://www.osrsguessr.com/"
 				target="_blank"
-				class="inline-flex items-center gap-x-2 text-sm text-brand-800 p-1 ps-3 rounded-full transition hover:border-brand-300 dark:bg-brand-900 dark:text-brand-200 dark:focus:outline-none dark:ring-1 dark:ring-brand-600"
+				class="hover:bg-brand-800 inline-flex items-center gap-x-2 text-sm  p-1 ps-3 rounded-full transition hover:border-brand-300 bg-brand-900 text-brand-200 dark:focus:outline-none dark:ring-1 dark:ring-brand-600"
 			>
 				Old School alternative
 				<span
@@ -108,13 +108,13 @@
 			{#if !data.user}
 				<a
 					href="/auth/login"
-					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
+					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4 hover:bg-brand-100"
 				>
 					Create Account
 				</a>
 				<button
 					type="button"
-					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
+					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4 hover:border-brand-400"
 					on:click={createGuestUser}
 					disabled={loading}
 				>
@@ -124,7 +124,7 @@
 
 			{#if data.user}
 				<a
-					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
+					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4 hover:border-brand-400"
 					href="/me/game"
 				>
 					Play Game

@@ -1,21 +1,32 @@
-<script>
-	let showMap = false;
-
+<script lang="ts">
+	import type { PageData } from './$types';
 	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
+	import { storage } from '$lib/appwrite';
+
+	// @ts-ignore
+	declare const L: any;
+
+	export let data: PageData;
+
+	const imageUrl = storage.getFilePreview('locationImages', data.location.imageId).toString();
+
+	let showMap = false;
+	let showHint = false;
+	let pickedLocation = null;
 
 	onMount(() => {
 		if (browser) {
 			var icon = L.icon({
 				iconUrl: '/marker.png',
 				iconSize: [41, 50],
-				iconAnchor: [20, 50],
+				iconAnchor: [20, 50]
 			});
 
 			var markersGroup = L.layerGroup();
 
 			L.TileLayer.Game = L.TileLayer.extend({
-				getTileUrl: function (coords) {
+				getTileUrl: function (coords: any) {
 					return L.Util.template(
 						'https://mejrs.github.io/layers_rs3/mapsquares/-1/{z}/0_{x}_{y}.png',
 						{
@@ -50,49 +61,84 @@
 
 			runescape_map.addLayer(markersGroup);
 
-			function addMarker(e) {
+			function addMarker(e: any) {
 				markersGroup.clearLayers();
 
-				console.log(e.latlng);
+				console.log(e.latlng.lat + '_' + e.latlng.lng);
 
-				L.marker(e.latlng, {icon: icon}).addTo(markersGroup);
+				L.marker(e.latlng, { icon: icon }).addTo(markersGroup);
+				pickedLocation = e.latlng;
 			}
 			runescape_map.on('click', addMarker);
 		}
 	});
+
+	function toggleHint() {
+		showHint = !showHint;
+	}
 </script>
 
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 	<!-- Title -->
 	<div class="mx-auto mb-8 lg:mb-14 text-center">
-		<h2 class="text-3xl lg:text-6xl text-brand-800 font-bold dark:text-white">Secret Tea</h2>
-		<p class="mt-3 mb-6 text-brand-800 dark:text-brand-500">Added 1.12.2023 by Meldiron</p>
+		<div class="w-full justify-center flex">
+			<a
+				href={`/me/game/${data.pack.$id}`}
+				class="text-brand-500 font-bold text-lg flex space-x-2 hover:text-brand-300 w-[fit-content] items-center"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="2"
+					stroke="currentColor"
+					class="w-4 h-4"
+				>
+					<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+				</svg>
+
+				<p>Go Back</p></a
+			>
+		</div>
+		<h2 class="text-3xl lg:text-6xl my-6 text-brand-800 font-bold dark:text-white">
+			Guess the location!
+		</h2>
+		<p class="mt-3 mb-6 text-xl text-brand-400">{data.pack.name} Pack</p>
 
 		<!-- Buttons -->
 		<div class="mt-8 gap-3 flex justify-center">
-			<button
-				type="button"
-				class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
-			>
-				Show Hint
-			</button>
+			{#if showMap}
+				<button
+					type="button"
+					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4 hover:border-brand-400"
+					on:click={() => (showMap = !showMap)}
+				>
+					Back to Picture
+				</button>
 
-			<button
-				type="button"
-				on:click={() => (showMap = !showMap)}
-				class="inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4"
-			>
-				{#if showMap}
-					Switch to Picture
-				{:else}
-					Switch to Map
+				{#if pickedLocation}
+				<button
+					type="button"
+					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4 hover:bg-brand-100"
+				>
+					Submit Guess
+				</button>
 				{/if}
-			</button>
+			{:else}
+				<button
+					type="button"
+					on:click={() => (showMap = !showMap)}
+					class="inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4 hover:bg-brand-100"
+				>
+					Switch to Map
+				</button>
+			{/if}
+			
 		</div>
 
 		<div class="mt-12">
 			<img
-				src="/location.png"
+				src={imageUrl}
 				alt="Location"
 				class={`w-full rounded-2xl ${showMap ? 'hidden' : 'block'}`}
 			/>
@@ -104,6 +150,59 @@
 				<div class="rounded-2xl" id="map" style="height: 700px;" />
 			</div>
 		</div>
+
+		<div class="mt-12">
+			<button
+				type="button"
+				class="inline-flex justify-center items-center gap-x-3 text-center bg border border-brand-700 bg-transparent text-white text-sm rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4 hover:border-brand-400"
+				on:click={toggleHint}
+			>
+				Show Hint
+			</button>
+		</div>
 	</div>
 	<!-- End Title -->
 </div>
+
+{#if showHint}
+	<div
+		class="w-full h-full fixed top-0 start-0 z-[500] overflow-x-hidden overflow-y-auto bg-black bg-opacity-50"
+	>
+		<div
+			class="mt-12 opacity-100 duration-500 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto"
+		>
+			<div
+				class="relative flex flex-col bg-white border shadow-sm rounded-xl overflow-hidden dark:bg-black dark:border-brand-700"
+			>
+				<div class="absolute top-2 end-2">
+					<button
+						on:click={toggleHint}
+						type="button"
+						class="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-lg border border-transparent text-brand-800 hover:bg-brand-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-brand-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-brand-600"
+					>
+						<span class="sr-only">Close</span>
+						<svg
+							class="flex-shrink-0 w-4 h-4"
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg
+						>
+					</button>
+				</div>
+
+				<div class="p-4 sm:p-10 overflow-y-auto">
+					<div class="text-center">
+						<h3 class="mb-2 text-xl font-bold text-brand-800 dark:text-brand-200">Hint</h3>
+						<p class="text-brand-50">{data.location.hint}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}

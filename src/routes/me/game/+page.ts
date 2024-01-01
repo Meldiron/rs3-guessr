@@ -2,9 +2,6 @@ import type { PageLoad } from './$types';
 import { databases } from '$lib/appwrite';
 import { Query } from 'appwrite';
 
-export const csr = true;
-export const ssr = false;
-
 export const load: PageLoad = async () => {
 	const packs = await databases.listDocuments('main', 'packs', [Query.limit(100)]);
 

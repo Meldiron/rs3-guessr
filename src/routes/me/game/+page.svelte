@@ -24,8 +24,6 @@
 		};
 	});
 
-	console.log(data);
-
 	async function validateOwned() {}
 
 	const sections = [
@@ -34,7 +32,7 @@
 			cards: packs.filter((pack) => pack.owned)
 		},
 		{
-			name: 'Shop',
+			name: 'Locked',
 			cards: packs.filter((pack) => !pack.owned)
 		}
 	];
@@ -48,16 +46,21 @@
 		</h1>
 		<!-- Grid -->
 		<div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+			{#if section.cards.length === 0}
+			<h1 class="col-span-12 text-2xl sm:text-4xl font-bold text-brand-600 w-full">
+				Nothing to show here
+			</h1>
+			{/if}
 			{#each section.cards as card}
 				<!-- Card -->
 				<a
 					href={`/me/game/${card.id}`}
-					class={`overflow-hidden relative cursor-pointer group scale-100 hover:scale-105 hover:shadow-lg shadow-md transform transition-transform duration-250 flex flex-col h-full bg-white border shadow-sm rounded-xl rounded-b-md dark:bg-brand-950 dark:shadow-brand-700/[.7] ${
+					class={`overflow-hidden relative cursor-pointer group scale-100 hover:scale-105 shadow-md transform transition-transform duration-250 flex flex-col h-full bg-white border shadow-sm rounded-xl rounded-b-md dark:bg-brand-950 dark:shadow-brand-700/[.7] ${
 						card.completed === card.total && card.owned ? 'border-green-400' : 'border-brand-600'
 					}`}
 				>
 					<div
-						class="h-52 flex flex-col justify-center items-center bg-brand-900 rounded-t-xl relative"
+						class="h-60 flex flex-col justify-center items-center bg-brand-900 rounded-t-xl relative"
 					>
 						<img class="object-cover object-center w-full h-full" src={card.imageUrl} alt="Cover" />
 

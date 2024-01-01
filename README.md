@@ -2,14 +2,14 @@ https://preline.co/examples/hero-sections.html
 
 FUNCTIONS
 
-guessLocation(locationId, x, y): boolean (execute:user)
-if user owns pack
+guessLocation(packId, locationId, x, y): boolean (execute:user)
 
 TODO:
 
+- shop / payments, maybe? Or free way to unlock locked
+- Form to report issue with location
 - profiles
 - achievements / badges
-- shop / payments
 
 # create-svelte
 
