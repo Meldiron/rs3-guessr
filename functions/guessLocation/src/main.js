@@ -40,7 +40,7 @@ export default async ({ req, res, log, error }) => {
   const correctLng = coordinates.lng;
 
   const distance = Math.hypot(lat - correctLat, lng - correctLng);
-  const isCorrect = distance <= 20;
+  const isCorrect = distance <= 10;
 
   if (!isCorrect) {
     return res.json({
