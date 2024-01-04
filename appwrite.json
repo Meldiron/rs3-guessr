@@ -3,26 +3,6 @@
     "projectName": "RSGuessr",
     "buckets": [
         {
-            "$id": "packImages",
-            "$createdAt": "2023-12-02T15:53:19.227+00:00",
-            "$updatedAt": "2023-12-02T15:53:47.682+00:00",
-            "$permissions": [
-                "read(\"users\")"
-            ],
-            "fileSecurity": false,
-            "name": "packImages",
-            "enabled": true,
-            "maximumFileSize": 10485760,
-            "allowedFileExtensions": [
-                "png",
-                "jpg",
-                "jpeg"
-            ],
-            "compression": "none",
-            "encryption": true,
-            "antivirus": true
-        },
-        {
             "$id": "locationImages",
             "$createdAt": "2023-12-02T15:53:58.488+00:00",
             "$updatedAt": "2023-12-02T15:54:11.415+00:00",
@@ -63,16 +43,6 @@
             "attributes": [
                 {
                     "key": "name",
-                    "type": "string",
-                    "status": "available",
-                    "error": "",
-                    "required": true,
-                    "array": false,
-                    "size": 255,
-                    "default": null
-                },
-                {
-                    "key": "imageId",
                     "type": "string",
                     "status": "available",
                     "error": "",
