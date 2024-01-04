@@ -366,9 +366,9 @@
 
 <div class="max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-14 mx-auto">
 	<div class="border border-brand-600 rounded-xl bg-brand-900 p-16">
-		<h1 class="text-brand-50 font-bolder text-4xl text-center">Interested? Give it a shot!</h1>
+		<h1 class="text-brand-50 font-extrabold text-4xl text-center">Interested? Give it a shot!</h1>
 
-		<div class="flex justify-center mt-12">
+		<div class="flex justify-center mt-10">
 			<a
 			href="/me/game"
 			class="inline-flex justify-center items-center gap-x-3 text-center bg border border-transparent bg-white text-brand-950 text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-brand-200 py-3 px-4 hover:bg-brand-100"
