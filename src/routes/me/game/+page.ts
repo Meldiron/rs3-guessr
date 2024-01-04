@@ -2,7 +2,9 @@ import type { PageLoad } from './$types';
 import { databases } from '$lib/appwrite';
 import { Query } from 'appwrite';
 
-export const load: PageLoad = async () => {
+export const load: PageLoad = async ({ parent}) => {
+	const data = await parent();
+
 	const packs = await databases.listDocuments('main', 'packs', [Query.limit(100)]);
 
 	const [locations, finishes] = await Promise.all([
@@ -18,6 +20,10 @@ export const load: PageLoad = async () => {
 			Query.equal(
 				'packId',
 				packs.documents.map((pack) => pack.$id)
+			),
+			Query.equal(
+				'userId',
+				data?.user?.$id ?? ''
 			),
 			Query.select(['$id', 'packId']),
 			Query.limit(100 * packs.documents.length)

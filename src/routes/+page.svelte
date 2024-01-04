@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { invalidateAll } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import { account } from '$lib/appwrite';
 	import type { LayoutData } from './$types';
 
@@ -43,6 +43,7 @@
 		try {
 			await account.createAnonymousSession();
 			await invalidateAll();
+			await goto('/me/game');
 		} catch (error: any) {
 			alert('Could not create guest user: ' + error.message);
 		} finally {
