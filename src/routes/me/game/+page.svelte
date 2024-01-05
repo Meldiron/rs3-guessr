@@ -18,6 +18,9 @@
 			id: pack.$id,
 			name: pack.name,
 			completed: data.finishes.documents.filter((finish) => finish.packId === pack.$id).length,
+			completedHardmode: data.finishes.documents.filter(
+				(finish) => finish.packId === pack.$id && finish.hardMode
+			).length,
 			total: data.locations.documents.filter((location) => location.packId === pack.$id).length,
 			owned
 		};
@@ -66,6 +69,8 @@
 			{#each section.cards as card}
 				{@const isCompleted = card.completed === (card.total || 1)}
 				{@const hasStarted = card.completed > 0}
+				{@const isHardmodeCompleted = card.completedHardmode === (card.total || 1)}
+				{@const hasHardmodeStarted = card.completedHardmode > 0}
 				<a
 					href={section.locked ? '#' : `/me/game/${card.id}`}
 					class={`flex flex-col border shadow-sm rounded-xl bg-brand-900 shadow-brand-700/[.7] ${
@@ -74,18 +79,19 @@
 				>
 					<div class="p-4 md:p-5">
 						<!-- Circular Progress -->
-						<div class="relative w-[fit-content]">
-							<svg width="52" height="52" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-								<!-- Background Circle -->
-								<circle
-									cx="18"
-									cy="18"
-									r="16"
-									fill="none"
-									class="stroke-current text-brand-700"
-									stroke-width="1"
-								/>
-								<!-- Progress Circle inside a group with rotation -->
+						<div class="flex justify-start items-center gap-2">
+							<div class="relative w-[fit-content]">
+								<svg width="52" height="52" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+									<!-- Background Circle -->
+									<circle
+										cx="18"
+										cy="18"
+										r="16"
+										fill="none"
+										class="stroke-current text-brand-700"
+										stroke-width="1"
+									/>
+									<!-- Progress Circle inside a group with rotation -->
 
 									<g class="origin-center -rotate-90 transform">
 										<circle
@@ -96,32 +102,89 @@
 											class="stroke-current text-green-600"
 											stroke-width={isCompleted ? 1 : 3}
 											stroke-dasharray={isCompleted ? 110 : 100}
-											stroke-dashoffset={!hasStarted ? 99 : (100 - Math.round((card.completed / (card.total || 1)) * 100))}
+											stroke-dashoffset={!hasStarted
+												? 99
+												: 100 - Math.round((card.completed / (card.total || 1)) * 100)}
 										/>
 									</g>
+								</svg>
 
-							</svg>
-
-							<div class="absolute inset-0 flex justify-center items-center text-green-600 text-sm">
-								{#if hasStarted && isCompleted}
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
+								<div
+									class="absolute inset-0 flex justify-center items-center text-green-600 text-sm"
+								>
+									{#if hasStarted && isCompleted}
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke-width="2"
+											stroke="currentColor"
+											class="w-5 h-5 text-green-600"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												d="m4.5 12.75 6 6 9-13.5"
+											/>
+										</svg>
+									{:else}
+										<span>{Math.round((card.completed / (card.total || 1)) * 100)}</span>
+										<span class="text-[10px] text-green-700 transform translate-y-[-2px]">%</span>
+									{/if}
+								</div>
+							</div>
+							<div class="relative w-[fit-content]">
+								<svg width="52" height="52" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+									<!-- Background Circle -->
+									<circle
+										cx="18"
+										cy="18"
+										r="16"
 										fill="none"
-										viewBox="0 0 24 24"
-										stroke-width="2"
-										stroke="currentColor"
-										class="w-5 h-5 text-green-600"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											d="m4.5 12.75 6 6 9-13.5"
+										class="stroke-current text-brand-700"
+										stroke-width="1"
+									/>
+									<!-- Progress Circle inside a group with rotation -->
+
+									<g class="origin-center -rotate-90 transform">
+										<circle
+											cx="18"
+											cy="18"
+											r="16"
+											fill="none"
+											class="stroke-current text-purple-600"
+											stroke-width={isHardmodeCompleted ? 1 : 3}
+											stroke-dasharray={isHardmodeCompleted ? 110 : 100}
+											stroke-dashoffset={!hasHardmodeStarted
+												? 99
+												: 100 - Math.round((card.completedHardmode / (card.total || 1)) * 100)}
 										/>
-									</svg>
-								{:else}
-									<span>{Math.round((card.completed / (card.total || 1)) * 100)}</span>
-									<span class="text-[10px] text-green-700 transform translate-y-[-2px]">%</span>
-								{/if}
+									</g>
+								</svg>
+
+								<div
+									class="absolute inset-0 flex justify-center items-center text-purple-600 text-sm"
+								>
+									{#if hasHardmodeStarted && isHardmodeCompleted}
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke-width="2"
+											stroke="currentColor"
+											class="w-5 h-5 text-purple-600"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												d="m4.5 12.75 6 6 9-13.5"
+											/>
+										</svg>
+									{:else}
+										<span>{Math.round((card.completedHardmode / (card.total || 1)) * 100)}</span>
+										<span class="text-[10px] text-purple-700 transform translate-y-[-2px]">%</span>
+									{/if}
+								</div>
 							</div>
 						</div>
 						<!-- End Circular Progress -->

@@ -29,7 +29,6 @@ export const load: PageLoad = async ({ params, parent }) => {
 			'userId',
 			data?.user?.$id ?? ''
 		),
-		Query.select(['$id', 'packId']),
 		Query.limit(1)
 	]);
 

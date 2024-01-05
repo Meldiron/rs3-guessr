@@ -26,7 +26,6 @@ export const load: PageLoad = async ({ params, parent }) => {
 				'userId',
 				data?.user?.$id ?? ''
 			),
-			Query.select(['$id', 'locationId']),
 			Query.limit(100)
 		])
 	]);

@@ -10,11 +10,12 @@
 	console.log(data.finishes);
 
 	const locations = data.locations.map((location) => {
-		console.log(location);
+		console.log(data.finishes.filter((finish) => finish.locationId === location.$id)[0]);
 		return {
 			id: location.$id,
 			imageUrl: storage.getFilePreview('locationImages', location.imageId).toString(),
-			completed: data.finishes.filter((finish) => finish.locationId === location.$id).length
+			completedHardmode: (data.finishes.filter((finish) => finish.locationId === location.$id)[0] ?? {}).hardMode ? true : false,
+			completed: data.finishes.filter((finish) => finish.locationId === location.$id).length > 0
 		};
 	});
 </script>
@@ -33,43 +34,52 @@
 	<!-- Grid -->
 	<div class="grid sm:grid-cols-2 lg:grid-cols-6 gap-6">
 		{#each locations as location}
-			<!-- Card -->
-			<a
-				href={`/me/game/${packId}/${location.id}`}
-				class={`overflow-hidden relative cursor-pointer group scale-100 hover:scale-105 shadow-md transform transition-transform duration-250 flex flex-col h-full bg-white border shadow-sm rounded-lg dark:bg-brand-950 dark:shadow-brand-700/[.7] ${
-					location.completed ? 'border-green-400' : 'border-brand-600'
-				}`}
-			>
-				<div
-					class="h-52 flex flex-col justify-center items-center bg-brand-900 rounded-lg relative"
-				>
-					<img
-						class="object-cover object-center w-full h-full blur-md"
-						src={location.imageUrl}
-						alt="Cover"
-					/>
+		<a class={`border group h-[300px] relative flex flex-col w-full min-h-[15rem] bg-center bg-cover rounded-xl hover:shadow-lg transition dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 border-brand-900`} style={`background-image: url('${location.imageUrl}')`} href={`/me/game/${data.pack.$id}/${location.id}`}>
+			<div class="flex-auto p-4">
+				{#if location.completed}
+				<span class="py-1 px-2 inline-flex items-center gap-x-1 text-xs font-medium rounded-full bg-green-900 text-green-400">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+						<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+					  </svg>
+					  
+					Completed
+				  </span>
+				  {:else}
+				  <span class="py-1 px-2 inline-flex items-center gap-x-1 text-xs font-medium rounded-full bg-brand-900 text-brand-400">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+					  </svg>
+					Not Completed
+				  </span>
+				{/if}
+				
 
-					{#if location.completed}
-						<div
-							class="absolute inset-0 flex items-center justify-center text-green-400 bg-opacity-75 bg-black rounded-lg"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 24 24"
-								fill="currentColor"
-								class="w-16 h-16"
-							>
-								<path
-									fill-rule="evenodd"
-									d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-									clip-rule="evenodd"
-								/>
-							</svg>
-						</div>
-					{/if}
-				</div>
-			</a>
-			<!-- End Card -->
+				{#if location.completedHardmode}
+				<span class="mt-2 py-1 px-2 inline-flex items-center gap-x-1 text-xs font-medium rounded-full bg-purple-950 text-purple-400">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3 h-3">
+						<path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+					  </svg>
+					  
+					  
+					With Hardmode
+				  </span>
+				  {:else}
+				  <span class="mt-2 py-1 px-2 inline-flex items-center gap-x-1 text-xs font-medium rounded-full bg-brand-900 text-brand-400">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+					  </svg>
+					Without Hardmode
+				  </span>
+				{/if}
+
+			</div>
+			<div class="p-4 pt-5 flex justify-center w-full rounded-xl rounded-t-none" style="backdrop-filter: brightness(80%) blur(2px);">
+			  <div class="inline-flex items-center gap-2 text-sm font-medium text-white group-hover:text-white/[.7]">
+				Visit Location
+				<svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+			  </div>
+			</div>
+		  </a>
 		{/each}
 	</div>
 	<!-- End Grid -->
