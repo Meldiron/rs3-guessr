@@ -441,7 +441,7 @@
 									<h3 class="font-semibold">Your guess was correct.</h3>
 									<div class="mt-2 text-sm text-white opacity-90 leading-relaxed">
 										{#if results.hardMode}
-											Amazing! Your guess was perfect and you also completed hardmode.
+											Amazing! Your guess was perfect and you completed hardmode.
 										{:else}
 											Great job! Your guess was good, but to complete hardmode, you must be spot on.
 										{/if}
