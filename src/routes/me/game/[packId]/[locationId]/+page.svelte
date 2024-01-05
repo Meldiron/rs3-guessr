@@ -573,7 +573,7 @@
 							<div class="ms-3">
 								<h3 class="font-semibold">
 									When guessing the location, always guess the location of camera which took the
-									screenshot. Your guess can be up to 15 meters off to make correct guess, but to
+									screenshot. Your guess can be up to 25 meters off to make correct guess, but to
 									make hardmode guess, you can only be up to 5 meters off.
 								</h3>
 							</div>
