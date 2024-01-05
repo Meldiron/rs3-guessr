@@ -6,6 +6,12 @@
 
 	export let data: LayoutData;
 
+	let menuOpen = false;
+
+	function toggleNavigation() {
+		menuOpen = !menuOpen;
+	}
+
 	async function logOut() {
 		try {
 			await account.deleteSession('current');
@@ -31,14 +37,14 @@
 			>
 			<div class="md:hidden">
 				<button
+				on:click={toggleNavigation}
 					type="button"
 					class="hs-collapse-toggle w-8 h-8 flex justify-center items-center text-sm font-semibold rounded-full border border-brand-200 text-brand-800 hover:bg-brand-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-brand-700 dark:hover:bg-brand-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-brand-600"
-					data-hs-collapse="#navbar-collapse-with-animation"
-					aria-controls="navbar-collapse-with-animation"
 					aria-label="Toggle navigation"
 				>
+				{#if !menuOpen}
 					<svg
-						class="hs-collapse-open:hidden flex-shrink-0 w-4 h-4"
+						class="flex-shrink-0 w-4 h-4"
 						xmlns="http://www.w3.org/2000/svg"
 						width="24"
 						height="24"
@@ -55,8 +61,9 @@
 							y2="18"
 						/></svg
 					>
+					{:else}
 					<svg
-						class="hs-collapse-open:block hidden flex-shrink-0 w-4 h-4"
+						class="flex-shrink-0 w-4 h-4"
 						xmlns="http://www.w3.org/2000/svg"
 						width="24"
 						height="24"
@@ -67,12 +74,12 @@
 						stroke-linecap="round"
 						stroke-linejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg
 					>
+					{/if}
 				</button>
 			</div>
 		</div>
 		<div
-			id="navbar-collapse-with-animation"
-			class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block"
+			class={`transition-all duration-300 basis-full grow md:block ${menuOpen ? 'block' : 'hidden'}`}
 		>
 			<div
 				class="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:ps-7"
