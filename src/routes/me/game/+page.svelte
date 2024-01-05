@@ -74,7 +74,7 @@
 				<a
 					href={section.locked ? '#' : `/me/game/${card.id}`}
 					class={`flex flex-col border shadow-sm rounded-xl bg-brand-900 shadow-brand-700/[.7] ${
-						isCompleted ? 'border-green-600' : 'border-brand-800'
+						isCompleted && isHardmodeCompleted ? 'border-purple-900' : (isCompleted ? 'border-green-600' : 'border-brand-800')
 					}`}
 				>
 					<div class="p-4 md:p-5">
