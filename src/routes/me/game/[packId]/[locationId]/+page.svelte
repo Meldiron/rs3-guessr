@@ -10,7 +10,7 @@
 
 	export let data: PageData;
 
-	const imageUrl = storage.getFilePreview('locationImages', data.location.imageId).toString();
+	const imageUrl = storage.getFilePreview('locationImages', data.location.imageId, 1920, 1080).toString();
 
 	let showMap = false;
 	let showInfo = false;
@@ -29,10 +29,17 @@
 
 			var markersGroup = L.layerGroup();
 
+			const view = JSON.parse(data.location.view ?? '{}');
+
+			const mapId = view.map ?? -1;
+			const startX = view.x ?? 3200;
+			const startY = view.y ?? 3200;
+			const startZoom = view.zoom ?? 2;
+
 			L.TileLayer.Game = L.TileLayer.extend({
 				getTileUrl: function (coords: any) {
 					return L.Util.template(
-						'https://mejrs.github.io/layers_rs3/mapsquares/-1/{z}/0_{x}_{y}.png',
+						'https://mejrs.github.io/layers_rs3/mapsquares/' + mapId + '/{z}/0_{x}_{y}.png',
 						{
 							z: coords.z,
 							x: coords.x,
@@ -47,11 +54,9 @@
 
 			let runescape_map = L.map('map', {
 				crs: L.CRS.Simple,
-				x: 3200,
-				y: 3200,
 				minZoom: 0,
 				maxZoom: 3
-			}).setView([3200, 3200], 2);
+			}).setView([startX, startY], startZoom);
 
 			L.tileLayer
 				.game('https://mejrs.github.io/layers_rs3/mapsquares/-1/{z}/0_{x}_{y}.png', {
@@ -226,6 +231,7 @@
 
 		<div class="mt-6 border border-brand-700 rounded-2xl">
 			<img
+				height="600"
 				src={imageUrl}
 				alt="Location"
 				class={`w-full rounded-2xl ${showMap ? 'hidden' : 'block'}`}
@@ -573,7 +579,7 @@
 							<div class="ms-3">
 								<h3 class="font-semibold">
 									When guessing the location, always guess the location of camera which took the
-									screenshot. Your guess can be up to 25 meters off to make correct guess, but to
+									screenshot. Your guess can be up to 15 meters off to make correct guess, but to
 									make hardmode guess, you can only be up to 5 meters off.
 								</h3>
 							</div>

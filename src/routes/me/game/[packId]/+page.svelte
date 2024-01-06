@@ -7,13 +7,11 @@
 	const packName = data.pack.name;
 	const packId = data.pack.$id;
 
-	console.log(data.finishes);
-
 	const locations = data.locations.map((location) => {
 		console.log(data.finishes.filter((finish) => finish.locationId === location.$id)[0]);
 		return {
 			id: location.$id,
-			imageUrl: storage.getFilePreview('locationImages', location.imageId).toString(),
+			imageUrl: storage.getFilePreview('locationImages', location.imageId, 400, 600, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 'webp').toString(),
 			completedHardmode: (data.finishes.filter((finish) => finish.locationId === location.$id)[0] ?? {}).hardMode ? true : false,
 			completed: data.finishes.filter((finish) => finish.locationId === location.$id).length > 0
 		};
@@ -33,6 +31,11 @@
 	</div>
 	<!-- Grid -->
 	<div class="grid sm:grid-cols-2 lg:grid-cols-6 gap-6">
+		{#if locations.length === 0}
+				<h1 class="col-span-12 text-2xl sm:text-4xl font-bold text-brand-600 w-full">
+					Nothing to show here.
+				</h1>
+			{/if}
 		{#each locations as location}
 		<a class={`border group h-[300px] relative flex flex-col w-full min-h-[15rem] bg-center bg-cover rounded-xl hover:shadow-lg transition dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 border-brand-900`} style={`background-image: url('${location.imageUrl}')`} href={`/me/game/${data.pack.$id}/${location.id}`}>
 			<div class="flex-auto p-4">
