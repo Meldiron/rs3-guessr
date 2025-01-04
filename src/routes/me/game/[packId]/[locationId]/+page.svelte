@@ -39,7 +39,7 @@
 			L.TileLayer.Game = L.TileLayer.extend({
 				getTileUrl: function (coords: any) {
 					return L.Util.template(
-						'https://mejrs.github.io/layers_rs3/mapsquares/' + mapId + '/{z}/0_{x}_{y}.png',
+						'https://mejrs.github.io/layers_rs3/map_squares/' + mapId + '/{z}/0_{x}_{y}.png',
 						{
 							z: coords.z,
 							x: coords.x,
@@ -59,7 +59,7 @@
 			}).setView([startX, startY], startZoom);
 
 			L.tileLayer
-				.game('https://mejrs.github.io/layers_rs3/mapsquares/-1/{z}/0_{x}_{y}.png', {
+				.game('https://mejrs.github.io/layers_rs3/map_squares/-1/{z}/0_{x}_{y}.png', {
 					minZoom: 0,
 					maxNativeZoom: 3,
 					maxZoom: 3,
